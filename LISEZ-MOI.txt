@@ -1,0 +1,55 @@
+SITE INNOVADATA — PAQUET PWA PRÊT À HÉBERGER
+================================================
+
+CE QUE CONTIENT CE DOSSIER
+---------------------------
+index.html              Le site complet (page unique)
+manifest.json            La carte d'identité de l'application (nom, icône, couleurs)
+sw.js                    Le service worker : permet l'installation et le fonctionnement hors ligne
+icons/                   Les icônes de l'application, dans toutes les tailles nécessaires
+LISEZ-MOI.txt            Ce fichier
+
+DÉPLOYER SUR NETLIFY (comme vos autres applications)
+---------------------------------------------------------
+1. Allez sur app.netlify.com → votre espace → "Add new site" → "Deploy manually"
+2. Glissez-déposez tout le CONTENU de ce dossier (pas le dossier lui-même : index.html,
+   manifest.json, sw.js et le dossier icons/ doivent être à la racine)
+3. Votre site est en ligne à l'adresse que Netlify vous donne (ex. innovadata.netlify.app,
+   votre adresse habituelle si vous redéployez par-dessus le site existant)
+
+LE BOUTON "INSTALLER"
+------------------------
+Un bouton noir « 📲 Installer » apparaît dans le bandeau du haut, à côté du menu.
+- Sur Android (Chrome, Edge, Samsung Internet) : le bouton déclenche l'installation native.
+  Une fois l'application installée, le bouton disparaît automatiquement.
+- Sur iPhone (Safari) : Apple interdit à tout site web de déclencher l'installation par un
+  clic. Le bouton affiche donc des instructions claires ("Partager → Sur l'écran d'accueil").
+  C'est une limite d'Apple, pas du site — aucune entreprise ne peut la contourner.
+- Si la page est ouverte depuis l'icône déjà installée, le bouton reste caché.
+- Sur très petit écran, seule l'icône 📲 reste visible (le mot "Installer" se cache pour
+  gagner de la place) ; le bouton fonctionne de la même façon.
+
+CE QUI CONTINUE DE FONCTIONNER COMME AVANT
+----------------------------------------------
+- Le formulaire de demande de devis envoie toujours vers votre Google Sheet (Code.gs). Si vous
+  n'avez pas encore collé l'URL de votre script Google dans la configuration (CONFIG.SCRIPT_URL
+  en haut du script, dans index.html), faites-le avant de déployer, sinon le bouton d'envoi
+  ouvrira WhatsApp à la place (solution de secours déjà prévue).
+- Le bouton et la fenêtre de discussion WhatsApp fonctionnent normalement.
+- Les liens vers InnovaStore et vers vos applications restent ceux déjà en place.
+
+MISE À JOUR DU CACHE HORS LIGNE
+-----------------------------------
+Si vous modifiez le site (nouveaux textes, nouveaux prix, etc.) et que certains visiteurs
+voient encore l'ancienne version, ouvrez sw.js et changez la ligne :
+  const CACHE_NAME = 'innovadata-site-v1';
+en
+  const CACHE_NAME = 'innovadata-site-v2';
+(puis v3, v4... à chaque mise à jour importante). Cela force les téléphones à retélécharger
+la dernière version plutôt que de resservir une copie en cache.
+
+BESOIN D'UN AUTRE CHANGEMENT SUR CE SITE ?
+----------------------------------------------
+Le fichier index.html est le même que celui que vous utilisez déjà : vous pouvez continuer à
+me demander des modifications de contenu, de prix ou de sections normalement, puis redéployer
+ce paquet complet (le bouton d'installation et le service worker resteront en place).
